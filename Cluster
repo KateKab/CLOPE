@@ -1,0 +1,41 @@
+module.exports = class Cluster {
+  transactions = [];
+
+  W() {
+    let allItems = "";
+    this.transactions.forEach((transaction) => {
+      allItems += transaction.join("");
+    });
+    return new Set(allItems).size;
+  }
+
+  Occ(i) {
+    let occ = 0;
+    this.transactions.forEach((transaction) => {
+      transaction.forEach((item) => {
+        if (item === i) {
+          occ++;
+        }
+      });
+    });
+
+    return occ;
+  }
+
+  S() {
+    let allItems = "";
+    this.transactions.forEach((transaction) => {
+      allItems += transaction.join("");
+    });
+    return allItems.length;
+  }
+
+  H() {
+    return (this.S() / this.W()).toFixed(1);
+  }
+
+  G() {
+    return (this.H() / this.W()).toFixed(1);
+  }
+  // [Symbol.iterator]() {}
+};
