@@ -2,10 +2,7 @@ module.exports = class Cluster {
   transactions = [];
 
   W() {
-    let allItems = "";
-    this.transactions.forEach((transaction) => {
-      allItems += transaction.join("");
-    });
+    let allItems = this.transactions.toString().split(",");
     return new Set(allItems).size;
   }
 
@@ -23,19 +20,11 @@ module.exports = class Cluster {
   }
 
   S() {
-    let allItems = "";
-    this.transactions.forEach((transaction) => {
-      allItems += transaction.join("");
-    });
+    let allItems = this.transactions.toString().split(",");
     return allItems.length;
   }
 
   H() {
     return (this.S() / this.W()).toFixed(1);
   }
-
-  G() {
-    return (this.H() / this.W()).toFixed(1);
-  }
-  // [Symbol.iterator]() {}
 };
